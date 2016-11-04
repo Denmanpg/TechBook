@@ -1,0 +1,30 @@
+<%= form_for(@post_comment) do |f| %>
+	<% if @post_comment.errors.any? %>
+		<div class="error_explanation">
+			<h2><%= pluralize(@post_comment.errors.count, "error") %>
+			prohibited this comment from begin saved: </h2>
+
+			<ul>
+			<% @post_comment.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>	
+
+<div class="form-group">
+<%= f.number_field :user_id, value: current_user.id %>
+</div>	
+
+<div class="form-group">
+<%= f.text_area :comment_entry, class: "form-control", rows: "3", placeholder: "Enter comment here..." %>
+</div>
+
+<div class="form-group">
+<%= f.number_field :post_id, value: @post.id %> 
+
+</div class="action">
+<%= f.submit "Post", class: "btn btn-default" %>
+</div>
+
+<% end %>

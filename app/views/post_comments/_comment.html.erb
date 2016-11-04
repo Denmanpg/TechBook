@@ -1,0 +1,12 @@
+<% post_userid = @post.user.id%>
+<% @post.post_comments.each do |post_comment| %>
+    <h5><%= link_to post_comment.user.username, user_profile_path(id: post_comment.user.id) %></h5>
+    <p><%= time_ago_in_words(post_comment.created_at) %></p>
+    <p><%= post_comment.comment_entry %></p>
+    
+    <% if comment.user.id == current_user.id %>
+        <%= link_to "Edit", edit_comment_path(comment.id), class: "btn btn-info" %>
+        <%= link_to "Delete", comment, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+    <% end %>
+
+<% end %>
